@@ -1,0 +1,55 @@
+name: Vite Build & Lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Install Linter
+        run: npm install eslint --save-dev
+
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Run Lint
+        run: npm run lint
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build  # Run deploy only if build succeeds
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21'
+
+      - name: Deploy
+        run: |
+          # Custom deployment commands go here
+          echo "Deploying..."
+
