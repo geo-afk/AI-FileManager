@@ -1,0 +1,64 @@
+<!-- @format -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="./src/style.css" />
+		<title>A.I FM</title>
+	</head>
+	<body>
+		<!-- Navigation Bar -->
+		<header class="fixed top-0 left-0 right-0 w-full z-10">
+			<nav class="bg-aside shadow-sm hover:shadow-md">
+				<div class="max-w-full mx-auto px-4 py-3 flex items-center space-x-4">
+					<div class="space-x-2 text-white font-bold w-2/4">
+						<span id="location-path">C:\User\Marketing</span>
+					</div>
+					<div class="flex justify-end w-2/4">
+						
+						<input
+							type="search"
+							placeholder="Search files..."
+							id="searchInput"
+							class="w-full max-w-md px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:border-transparent"
+						/>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<main class="pt-16">
+			
+			<div
+				class="w-full pr-0 lg:pr-96 bg-main min-h-screen sm:w-3/5 md:w-[69%] lg:w-full xl:w-full"
+			>
+			
+				<div
+					id="fileGrid"
+					class="container mx-auto max-w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-6"
+				></div>
+			</div>
+
+			<!-- File Details Sidebar -->
+			<div
+				class="fixed right-0 top-0 w-full sm:w-[300px] md:w-[300px] lg:w-96 h-screen bg-aside shadow-lg p-4 transform translate-x-full sm:translate-x-0 transition-transform duration-300 ease-in-out"
+			>
+				<div class="mb-4 mt-28">
+					<img class="w-full h-48 bg-gray-100 rounded-lg mb-4" alt="Thumbnail"></img>
+				</div>
+				<div id="fileDetails" class="space-y-2 text-sm text-gray-10 mt-80">
+					<h3 class="text-lg font-medium text-gray-300 mb-10">File Details</h3>
+					<p id="dateModified">Date Modified: October 25, 2024</p>
+					<p id="fileName">File Name: document.pdf</p>
+					<p id="fileType">File Type: PDF Document</p>
+					<p id="fileSize">File Size: 2.4 MB</p>
+				</div>
+			</div>
+		</main>
+
+		<script defer src="./src/script.js"></script>
+	</body>
+</html>
