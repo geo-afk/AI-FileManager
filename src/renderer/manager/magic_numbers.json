@@ -1,0 +1,136 @@
+{
+  "images": {
+    "FFD8FFE0": "JPEG/JFIF",
+    "FFD8FFE1": "JPEG/EXIF",
+    "FFD8FFE2": "JPEG/SPIFF",
+    "FFD8FFE3": "JPEG/JTIF",
+    "89504E47": "PNG",
+    "47494638": "GIF",
+    "424D": "BMP",
+    "52494646": "WebP",
+    "49492A00": "TIFF (little-endian)",
+    "4D4D002A": "TIFF (big-endian)",
+    "38425053": "PSD",
+    "465753": "SWF",
+    "435753": "SWF (compressed)",
+    "00000100": "ICO",
+    "69636E73": "ICNS",
+    "4949BC": "JXR/WDP",
+    "464F524D": "IFF"
+  },
+  "archives": {
+    "504B0304": "ZIP",
+    "504B0506": "ZIP (empty)",
+    "504B0708": "ZIP (spanned)",
+    "526172211A07": "RAR",
+    "526172211A0700": "RAR 5.0+",
+    "377ABCAF271C": "7Z",
+    "7573746172": "TAR",
+    "1F8B08": "GZIP",
+    "425A68": "BZIP2",
+    "1F9D": "COMPRESS",
+    "FD377A585A00": "XZ",
+    "04224D18": "LZ4",
+    "2844": "STUFFIT",
+    "1F8B": "GZIP"
+  },
+  "audio": {
+    "FFFB": "MP3",
+    "FFF3": "MP3",
+    "FFF2": "MP3",
+    "49443": "MP3 with ID3",
+    "52494646": "WAV",
+    "664C6143": "FLAC",
+    "00000020667479704D3441": "M4A",
+    "4F676753": "OGG",
+    "4D546864": "MIDI",
+    "2E736E64": "AU",
+    "2E7261FD": "RA",
+    "2321414D52": "AMR",
+    "4D5448644D54726B": "MID",
+    "434F4D4D": "AIFF"
+  },
+  "video": {
+    "00000018": "MP4",
+    "667479704D534E56": "MP4",
+    "667479704953434D": "MP4",
+    "52494646": "AVI",
+    "6674797071742020": "MOV",
+    "1A45DFA30": "MKV",
+    "464C56": "FLV",
+    "47": "MPEG Transport Stream",
+    "00000001": "MPEG Program Stream",
+    "3026B2758E66CF11": "WMV",
+    "44485856": "DIVX",
+    "1A45DFA3": "WEBM"
+  },
+  "documents": {
+    "25504446": "PDF",
+    "D0CF11E0A1B11AE1": "MS Office Legacy (doc, xls, ppt)",
+    "504B030414000600": "MS Office Modern (docx, xlsx, pptx)",
+    "504B0304140006000800": "OpenDocument Format",
+    "7B5C72746631": "RTF",
+    "EFBBBF": "UTF-8 Text with BOM",
+    "FEFF": "UTF-16 Text with BOM",
+    "0000FEFF": "UTF-32 Text with BOM",
+    "1D7D": "XZ Compressed Text",
+    "C5D0D3C6": "EPS",
+    "0A2524454F46": "Linux/Unix mail",
+    "7573746172003030": "TAR Archive",
+    "526172211A0700": "RAR Archive",
+    "255044462D": "Adobe PDF"
+  },
+  "executables": {
+    "4D5A": "EXE/DLL/COM",
+    "FEEDFACE": "Mach-O (32-bit)",
+    "FEEDFACF": "Mach-O (64-bit)",
+    "CAFEBABE": "Java Class File",
+    "BEBAFECA": "Java Pack200",
+    "DEY": "Android DEX",
+    "213C617263683E": "Linux deb Package",
+    "7F454C46": "Unix Executable",
+    "4A4152435300": "JAR Archive"
+  },
+  "databases": {
+    "53514C69746520": "SQLite",
+    "0001000000": "MySQL",
+    "4D5346542042444200": "Microsoft Access",
+    "0000000C6A502020": "Berkeley DB",
+    "00000100": "Microsoft SQL Server",
+    "EDABEEDB": "Redis RDB"
+  },
+  "fonts": {
+    "00010000": "TrueType Font",
+    "4F54544F": "OpenType Font",
+    "74727565": "Apple TrueType Font",
+    "774F4646": "WOFF Font",
+    "774F4632": "WOFF2 Font"
+  },
+  "disk_images": {
+    "7801730D": "DMG",
+    "4344303031": "ISO",
+    "213C7374": "Apple Disk Image",
+    "45520200": "VMDK",
+    "3C3C3C20": "VDI",
+    "636F6E6563746978": "VHD"
+  },
+  "cryptocurrency": {
+    "0488ADE4": "Bitcoin Private Key",
+    "0488B21E": "Bitcoin Public Key",
+    "A11E": "Ethereum Wallet",
+    "4C494E": "Bitcoin-Qt Wallet"
+  },
+  "3d_models": {
+    "6D6F6F76": "Quicktime 3D",
+    "4D4D002A": "3DS Max",
+    "756E6974792066696C65": "Unity3D Asset",
+    "424C454E444552": "Blender",
+    "7B0D0A22": "glTF",
+    "766572746578": "OBJ"
+  },
+  "certificates": {
+    "308201": "X.509 Certificate",
+    "30820122300D06092A864886F70D01010105000382010F003082010A0282010100": "RSA Public Key",
+    "2D2D2D2D2D424547494E": "PEM Certificate"
+  }
+}
