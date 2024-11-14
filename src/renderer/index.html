@@ -1,0 +1,221 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:"
+    />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/main.css" type="text/css" />
+    <title>A.I FM</title>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 w-full z-10">
+      <nav class="bg-aside shadow-sm hover:shadow-md">
+        <div class="max-w-full mx-auto px-4 py-3 flex items-center space-x-4">
+          <div class="flex items-center space-x-2 text-white font-bold w-2/4">
+            <span id="location-path">C:\User\Marketing</span>
+            <!-- Dropdown Button -->
+            <div class="relative">
+              <button
+                id="dropdownButton"
+                class="text-gray-500 bg-gray-50 px-2 ml-1 py-1 rounded-lg flex items-center space-x-1 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:border-transparent"
+              >
+                <span>Sort</span>
+                <!-- Dropdown Arrow SVG -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <div
+                id="dropdownMenu"
+                class="hidden absolute left-0 mt-2 w-36 bg-white rounded-lg shadow-lg"
+              >
+                <a
+                  href="#"
+                  class="menu-item flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  data-name="name"
+                >
+                  <svg
+                    class="icon w-4 h-4 mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <!-- Checkbox background -->
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 3h18v18H3z"
+                      fill="#0078D4"
+                    />
+                    <!-- Checkmark -->
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 12l4 4 8-8"
+                      stroke="#ffffff"
+                    />
+                  </svg>
+                  Name
+                </a>
+                <a
+                  href="#"
+                  class="menu-item flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  data-name="date-modified"
+                >
+                  <svg
+                    class="icon w-4 h-4 mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 3h18v18H3z"
+                    />
+                  </svg>
+                  Date Modified
+                </a>
+                <a
+                  href="#"
+                  class="menu-item flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  data-name="type"
+                >
+                  <svg
+                    class="icon w-4 h-4 mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 3h18v18H3z"
+                    />
+                  </svg>
+                  Type
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end w-2/4">
+            <input
+              type="search"
+              placeholder="Search files..."
+              id="searchInput"
+              class="w-full max-w-md px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="pt-16 relative">
+      <div
+        class="w-full pr-0 lg:pr-96 bg-main min-h-screen sm:w-3/5 md:w-[69%] lg:w-full xl:w-full"
+      >
+        <div
+          id="fileGrid"
+          class="container mx-auto max-w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-6"
+        ></div>
+
+        <!-- Right-click context menu with SVG icons side by side with text -->
+        <div
+          id="contextMenu"
+          class="hidden fixed z-50 w-48 bg-white rounded-lg shadow-lg border border-gray-200"
+        >
+          <ul class="py-2">
+            <li
+              id="openFile"
+              class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+            >
+              <!-- Open File SVG Icon -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2 text-gray-500"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M3 6a2 2 0 012-2h6.586a2 2 0 011.414.586l5.414 5.414a2 2 0 01.586 1.414V18a2 2 0 01-2 2H5a2 2 0 01-2-2V6z"
+                />
+                <path d="M15 8.5V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14h10a2 2 0 002-2v-8.5h-2z" />
+              </svg>
+              <span>Open File</span>
+            </li>
+            <li
+              id="summarizeFile"
+              class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+            >
+              <!-- Summarize File SVG Icon -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2 text-gray-500"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2a9 9 0 00-9 9 9 9 0 0018 0 9 9 0 00-9-9zm1 13h-2v-2h2v2zm0-4h-2V7h2v4z"
+                />
+              </svg>
+              <span>Summarize File</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- File Details Sidebar -->
+      <div
+        class="fixed right-0 top-0 w-full sm:w-[300px] md:w-[300px] lg:w-96 h-screen sm:h-3/4 md:h-svh lg:h-screen xl:h-screen pt-16 bg-aside shadow-lg transform translate-x-full sm:translate-x-0 transition-transform duration-300 ease-in-out"
+      >
+        <div class="p-4 h-full flex flex-col justify-between">
+          <!-- Thumbnail section -->
+          <div class="flex-none">
+            <img class="w-full h-48 bg-gray-100 rounded-lg" alt="Thumbnail" />
+          </div>
+
+          <!-- File Details section -->
+          <div class="mt-auto overflow-y-auto max-h-[50%]">
+            <div class="space-y-2 text-sm text-gray-10">
+              <h3 class="text-lg font-medium text-gray-300 mb-4">File Details</h3>
+              <p id="dateModified"></p>
+              <p id="fileName"></p>
+              <p id="fileType"></p>
+              <p id="fileSize"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="./src/renderer.js"></script>
+  </body>
+</html>
