@@ -29,5 +29,6 @@ export function retrieveFileType(hex) {
   if (found) {
     return flattenedJson[hex]
   }
-  return null
+
+  return ''
 }

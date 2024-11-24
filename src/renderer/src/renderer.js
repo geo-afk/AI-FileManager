@@ -1,10 +1,12 @@
 import { ObjectManager } from '../manager/resource_manager.js'
 import { getResources } from '../manager/loadLocalFiles.js'
+import { NetworkShare } from '../manager/network_share.js'
 
 const fileName = document.getElementById('fileName')
 const fileType = document.getElementById('fileType')
 const fileSize = document.getElementById('fileSize')
 const fileOpen = document.getElementById('openFile')
+const thumbnail = document.getElementById('thumbnail-container')
 const dropdownMenu = document.getElementById('dropdownMenu')
 const dateModified = document.getElementById('dateModified')
 const fileSummarize = document.getElementById('summarizeFile')
@@ -42,7 +44,6 @@ document.addEventListener('click', (event) => {
 
 fileOpen.addEventListener('click', () => {
   const currentFile = window.currentFile
-  console.log(currentFile.path)
 
   window.api.openFile(currentFile.path)
   document.getElementById('contextMenu').classList.add('hidden')
@@ -55,8 +56,6 @@ fileSummarize.addEventListener('click', () => {
 
 // Function to create the file element with a right-click context menu
 function createFileElement(resource) {
-  // console.log(resource)
-
   const div = document.createElement('div')
   div.className =
     'p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer group'
@@ -72,7 +71,7 @@ function createFileElement(resource) {
   `
 
   // Add click event to update sidebar to show metadata
-  div.addEventListener('click', () => updateFileDetails(resource))
+  div.addEventListener('click', (event) => updateFileDetails(resource, event))
 
   // Right-click event listener
   div.addEventListener('contextmenu', (event) => {
@@ -84,11 +83,31 @@ function createFileElement(resource) {
 }
 
 // Function to update file details in sidebar
-function updateFileDetails(resource) {
+async function updateFileDetails(resource, event) {
   dateModified.textContent = `Date Modified: ${resource.dateModified}`
   fileName.textContent = `File Name: ${resource.fileName}`
   fileType.textContent = `File Type: ${resource.type}`
   fileSize.textContent = `File Size: ${resource.size} mb`
+
+  // Remove the previous image (if any)
+  while (thumbnail.firstChild) {
+    thumbnail.removeChild(thumbnail.firstChild)
+  }
+
+  const image = await window.api.retrieveThumbnail(resource.path)
+
+  if (image) {
+    // Create a new img element
+    const img = document.createElement('img')
+
+    img.src = image
+
+    // Apply Tailwind classes for styling
+    img.classList.add('w-full', 'h-auto', 'max-h-70', 'bg-gray-100', 'rounded-lg', 'object-cover')
+
+    thumbnail.innerHTML = '' // Optionally clear existing content
+    thumbnail.appendChild(img)
+  }
 }
 
 // Show context menu
@@ -103,8 +122,8 @@ function showContextMenu(event, resource) {
 }
 
 const manager = new ObjectManager()
-async function loadResources() {
-  const resources = await getResources()
+async function loadResources(url) {
+  const resources = await getResources(url)
   manager.addObject(resources)
 }
 
@@ -130,7 +149,35 @@ function renderFiles(filesToRender) {
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     // Wait for resources to be loaded before rendering
-    await loadResources()
+
+    const data = await window.api.getSharedData()
+
+    const type = data.type
+    const resourcePath = data.resourcePath
+
+    if (type == 'local') {
+      await loadResources(resourcePath)
+    }
+
+    if (type == 'network') {
+      // const platform = window.platform.operatingSystem()
+
+      const sharePath = resourcePath
+      // const sharePath = '\\\\KOOLAID\\Saved Pictures'
+
+      const share = new NetworkShare(sharePath)
+
+      try {
+        await share.connect()
+        manager.addObject(await share.listFiles())
+      } catch (error) {
+        console.error('Error:', error.message)
+      } finally {
+        if (share.connected) {
+          await share.disconnect()
+        }
+      }
+    }
 
     renderFiles(manager.getAllObjects())
     handleSorting()
@@ -138,13 +185,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Setup search handler
     const searchInput = document.getElementById('searchInput')
     searchInput.addEventListener('input', handleSearch)
+
+    // Setup directory path
+    const directoryPath = document.getElementById('location-path')
+    directoryPath.textContent = resourcePath
   } catch (error) {
     console.error('Error loading resources:', error)
   }
 })
 
 // Sort handler
-
 function handleSorting() {
   const menuItems = document.querySelectorAll('.menu-item')
 

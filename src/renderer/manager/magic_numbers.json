@@ -1,11 +1,15 @@
 {
   "images": {
     "FFD8FFE0": "JPEG/JFIF",
+    "FFD8FFEE": "JPEG/JP2",
+    "FFD8FFDB": "JPEG",
     "FFD8FFE1": "JPEG/EXIF",
     "FFD8FFE2": "JPEG/SPIFF",
     "FFD8FFE3": "JPEG/JTIF",
     "89504E47": "PNG",
     "47494638": "GIF",
+    "FFFE0D00": "EMF",
+
     "424D": "BMP",
     "52494646": "WebP",
     "49492A00": "TIFF (little-endian)",

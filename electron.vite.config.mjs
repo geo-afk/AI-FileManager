@@ -7,5 +7,10 @@ export default defineConfig({
   preload: {
     plugins: [externalizeDepsPlugin()]
   },
-  renderer: {}
+  renderer: {},
+  css: {
+    postcss: {
+      plugins: 'tailwindcss'
+    }
+  }
 })

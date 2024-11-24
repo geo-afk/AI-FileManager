@@ -2,6 +2,11 @@
 export const iconMappings = {
   // Images
   JPEG: { icon: 'image', color: 'text-blue-500' },
+  'JPEG/JFIF': { icon: 'image', color: 'text-blue-500' },
+  'JPEG/JP2': { icon: 'image', color: 'text-blue-500' },
+  'JPEG/EXIF': { icon: 'image', color: 'text-blue-500' },
+  'JPEG/SPIFF': { icon: 'image', color: 'text-blue-500' },
+  'JPEG/JTIF': { icon: 'image', color: 'text-blue-500' },
   PNG: { icon: 'image', color: 'text-blue-500' },
   GIF: { icon: 'image', color: 'text-blue-500' },
   BMP: { icon: 'image', color: 'text-blue-500' },
@@ -13,10 +18,14 @@ export const iconMappings = {
   ICNS: { icon: 'image', color: 'text-blue-500' },
   JXR: { icon: 'image', color: 'text-blue-500' },
   IFF: { icon: 'image', color: 'text-blue-500' },
+  EMF: { icon: 'image', color: 'text-blue-500' }, // Added for EMF files
 
   // Archives
   ZIP: { icon: 'archive', color: 'text-gray-700' },
+  'ZIP (empty)': { icon: 'archive', color: 'text-gray-700' },
+  'ZIP (spanned)': { icon: 'archive', color: 'text-gray-700' },
   RAR: { icon: 'archive', color: 'text-gray-700' },
+  'RAR 5.0+': { icon: 'archive', color: 'text-gray-700' },
   '7Z': { icon: 'archive', color: 'text-gray-700' },
   TAR: { icon: 'archive', color: 'text-gray-700' },
   GZIP: { icon: 'archive', color: 'text-gray-700' },
@@ -30,17 +39,19 @@ export const iconMappings = {
   MP3: { icon: 'music_note', color: 'text-pink-500' },
   WAV: { icon: 'music_note', color: 'text-pink-500' },
   FLAC: { icon: 'music_note', color: 'text-pink-500' },
+  'MP3 with ID3': { icon: 'music_note', color: 'text-pink-500' },
   M4A: { icon: 'music_note', color: 'text-pink-500' },
   OGG: { icon: 'music_note', color: 'text-pink-500' },
   MIDI: { icon: 'music_note', color: 'text-pink-500' },
   AU: { icon: 'music_note', color: 'text-pink-500' },
   RA: { icon: 'music_note', color: 'text-pink-500' },
   AMR: { icon: 'music_note', color: 'text-pink-500' },
+  MID: { icon: 'music_note', color: 'text-pink-500' },
   AIFF: { icon: 'music_note', color: 'text-pink-500' },
 
   // Video
   MP4: { icon: 'video_library', color: 'text-purple-500' },
-  AVI: { icon: 'movie', color: 'text-purple-500' },
+  AVI: { icon: 'movie', color: 'text-purple -500' },
   MOV: { icon: 'movie', color: 'text-purple-500' },
   MKV: { icon: 'video_library', color: 'text-purple-500' },
   FLV: { icon: 'video_library', color: 'text-purple-500' },
@@ -54,7 +65,7 @@ export const iconMappings = {
   PDF: { icon: 'picture_as_pdf', color: 'text-red-600' },
   'MS Office Legacy': { icon: 'description', color: 'text-blue-600' },
   'MS Office Modern': { icon: 'description', color: 'text-blue-600' },
-  OpenDocument: { icon: 'description', color: 'text-blue-600' },
+  'OpenDocument Format': { icon: 'description', color: 'text-blue-600' },
   RTF: { icon: 'description', color: 'text-gray-600' },
   'UTF-8 Text with BOM': { icon: 'article', color: 'text-gray-600' },
   'UTF-16 Text with BOM': { icon: 'article', color: 'text-gray-600' },
@@ -100,7 +111,7 @@ export const iconMappings = {
   // 3D Models
   'Quicktime 3D': { icon: '3d_rotation', color: 'text-blue-500' },
   '3DS Max': { icon: '3d_rotation', color: 'text-blue-500' },
-  'Unity3D Asset': { icon: '3d_rotation', color: 'text-blue-500' },
+  'Unity3 D Asset': { icon: '3d_rotation', color: 'text-blue-500' },
   Blender: { icon: '3d_rotation', color: 'text-blue-500' },
   glTF: { icon: '3d_rotation', color: 'text-blue-500' },
   OBJ: { icon: '3d_rotation', color: 'text-blue-500' },
@@ -111,5 +122,8 @@ export const iconMappings = {
   'PEM Certificate': { icon: 'security', color: 'text-red-600' },
 
   // Directory
-  Directory: { icon: 'folder', color: 'text-yellow-500' }
+  Directory: { icon: 'folder', color: 'text-yellow-500' },
+
+  // Unknown types
+  Unknown: { icon: 'help', color: 'text-gray-500' }
 }

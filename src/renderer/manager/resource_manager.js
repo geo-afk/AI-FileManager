@@ -50,9 +50,6 @@ export class ObjectManager {
   }
 
   searchObjects(property, value) {
-    console.log(property)
-    console.log(value)
-
     return searchByProperty(this.objects, property, value)
   }
 

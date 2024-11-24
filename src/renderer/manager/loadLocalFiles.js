@@ -2,11 +2,10 @@ import { retrieveFileType } from './magicNumber.js'
 import { iconMappings } from './material_icon_mapping.js'
 import { Resource } from './resource.js'
 
-const dirPath = 'C:\\Users\\KoolAid\\Downloads\\Linear Algebra'
-
 async function getMagicNumber(filePath) {
   try {
     const magicNumber = await window.api.readMagicNumber(filePath)
+
     return magicNumber
   } catch (error) {
     console.error(error)
@@ -18,6 +17,11 @@ async function getFileType(filePath) {
   try {
     const magicNumber = await getMagicNumber(filePath)
     const fileType = retrieveFileType(magicNumber)
+
+    if (!fileType) {
+      return 'unknown'
+    }
+
     return fileType
   } catch (error) {
     console.error(error)
@@ -27,9 +31,11 @@ async function getFileType(filePath) {
 }
 
 async function getType(filePath) {
-  if (window.FileSystem.isFile(filePath)) {
+  const type = await window.api.checkFileFolder(filePath)
+
+  if (type == 'file') {
     return (await getFileType(filePath)).toLowerCase()
-  } else if (window.FileSystem.isDirectory(filePath)) {
+  } else if (type == 'directory') {
     return 'directory'
   }
 
@@ -49,10 +55,10 @@ function getIcon(type) {
     }
   }
 
-  return 1
+  return ''
 }
 
-export async function getResources() {
+export async function getResources(dirPath) {
   const directoryData = await window.FileSystem.readdir(dirPath)
   let resources = []
 
