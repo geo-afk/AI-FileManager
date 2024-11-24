@@ -1,5 +1,6 @@
 import { retrieveFileType } from './magicNumber.js'
 import { iconMappings } from './material_icon_mapping.js'
+// import { summarize } from './summarizer.js'
 import { Resource } from './resource.js'
 
 async function getMagicNumber(filePath) {
@@ -75,6 +76,11 @@ export async function getResources(dirPath) {
       const type = await getType(filePath)
       const sizeInMB = (stats.size / (1024 * 1024)).toFixed(2)
       let icon = getIcon(type)
+
+      if (type != 'directory') {
+        const summary = await window.api.getSummary(filePath)
+        console.log(summary)
+      }
 
       const resource = new Resource(fileName, lastModified, filePath, type, sizeInMB, icon)
 

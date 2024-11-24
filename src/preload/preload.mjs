@@ -32,6 +32,9 @@ api.retrieveThumbnail = async (filePath) => {
 api.getSharedData = () => {
   return ipcRenderer.invoke('get-shared-data')
 }
+api.getSummary = async (filePath) => {
+  return await ipcRenderer.invoke('get-summary', filePath)
+}
 api.successConnection = (resourcePath, type) => {
   ipcRenderer.send('get-connection', resourcePath, type)
 }
@@ -67,17 +70,6 @@ api.formattedDate = (mtime) => {
     minute: '2-digit',
     hour12: true
   }).format(mtime)
-}
-
-api.GoogleAIFileManager = (apiKey) => {
-  return new GoogleAIFileManager(apiKey)
-}
-api.GoogleGenerativeAI = (apiKey) => {
-  return new GoogleGenerativeAI(apiKey)
-}
-
-api.mimeType = (extname) => {
-  return mime.contentType(extname)
 }
 
 api.checkFileFolder = async (resourcePath) => {
@@ -137,3 +129,14 @@ contextBridge.exposeInMainWorld('platform', {
 contextBridge.exposeInMainWorld('execute', {
   execSync: (command, pipe) => execSync.execSync(command, pipe)
 })
+
+api.GoogleAIFileManager = (apiKey) => {
+  return new GoogleAIFileManager(apiKey)
+}
+api.GoogleGenerativeAI = (apiKey) => {
+  return new GoogleGenerativeAI(apiKey)
+}
+
+api.mimeType = (extname) => {
+  return mime.contentType(extname)
+}

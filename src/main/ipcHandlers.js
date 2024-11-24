@@ -2,6 +2,7 @@ import os from 'os'
 import { join } from 'path'
 import fs from 'fs/promises'
 import { NetworkShare } from './networkShareTest'
+import { summarize } from './summarizer'
 import { ThumbnailGenerator } from './thumbnail_generator'
 import { ipcMain, nativeImage, shell, app } from 'electron'
 
@@ -43,6 +44,15 @@ export function setupIpcHandlers(mainWindowInstance, createWindow) {
       if (fileHandle) {
         await fileHandle.close()
       }
+    }
+  })
+  ipcMain.handle('get-summary', async (event, filePath) => {
+    try {
+      const summary = summarize(filePath)
+      return summary
+    } catch (error) {
+      console.error(error)
+      throw error // Re-throw to send the error back to the renderer
     }
   })
 
