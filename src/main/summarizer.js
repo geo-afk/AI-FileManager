@@ -9,7 +9,7 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { GoogleAIFileManager } from '@google/generative-ai/server'
 
-const apiKey = process.env.GEMINI_API_KEY
+const apiKey = 'AIzaSyAcgp7MHQJ7x0pqNfM04m9znBYGn4sx7R4'
 const genAI = new GoogleGenerativeAI(apiKey)
 const fileManager = new GoogleAIFileManager(apiKey)
 
@@ -69,6 +69,16 @@ const generationConfig = {
 export async function summarize(filePath) {
   // TODO Make these files available on the local file system
   // You may need to update the file paths
+
+  let avoid = [
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  ]
+
+  if (avoid.includes(mime.contentType(path.extname(filePath)))) {
+    return 'Microsoft Documents...'
+  }
   const files = [await uploadToGemini(filePath, mime.contentType(path.extname(filePath)))]
 
   // Some files have a processing delay. Wait for them to be ready.
@@ -92,7 +102,7 @@ export async function summarize(filePath) {
   })
 
   const result = await chatSession.sendMessage(
-    'give a summary of what the file contains as a paragraph'
+    'give a summary of what the file contains as a paragraph in at most 25 words'
   )
   console.log(result.response.text())
   return result.response.text()

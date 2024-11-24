@@ -5,6 +5,7 @@ import { NetworkShare } from '../manager/network_share.js'
 const fileName = document.getElementById('fileName')
 const fileType = document.getElementById('fileType')
 const fileSize = document.getElementById('fileSize')
+const content = document.getElementById('content')
 const fileOpen = document.getElementById('openFile')
 const thumbnail = document.getElementById('thumbnail-container')
 const dropdownMenu = document.getElementById('dropdownMenu')
@@ -88,6 +89,7 @@ async function updateFileDetails(resource, event) {
   fileName.textContent = `File Name: ${resource.fileName}`
   fileType.textContent = `File Type: ${resource.type}`
   fileSize.textContent = `File Size: ${resource.size} mb`
+  content.textContent = `${resource.content}`
 
   // Remove the previous image (if any)
   while (thumbnail.firstChild) {
@@ -163,7 +165,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       // const platform = window.platform.operatingSystem()
 
       const sharePath = resourcePath
-      // const sharePath = '\\\\KOOLAID\\Saved Pictures'
 
       const share = new NetworkShare(sharePath)
 

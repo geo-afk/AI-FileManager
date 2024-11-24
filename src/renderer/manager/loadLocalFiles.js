@@ -77,12 +77,13 @@ export async function getResources(dirPath) {
       const sizeInMB = (stats.size / (1024 * 1024)).toFixed(2)
       let icon = getIcon(type)
 
+      let content = ''
       if (type != 'directory') {
-        const summary = await window.api.getSummary(filePath)
-        console.log(summary)
+        content = await window.api.getSummary(filePath)
+        console.log(content)
       }
 
-      const resource = new Resource(fileName, lastModified, filePath, type, sizeInMB, icon)
+      const resource = new Resource(fileName, lastModified, filePath, type, sizeInMB, icon, content)
 
       resources.push(resource)
     } catch (error) {
