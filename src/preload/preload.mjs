@@ -1,9 +1,12 @@
 import os from 'os'
+import mime from 'mime-types' // Use the 'mime-types' module to determine the MIME type of a file
 import path from 'path'
 import execSync from 'child_process'
 import { fileURLToPath } from 'node:url'
 import fs, { promises as fsPromises } from 'fs'
 import { contextBridge, ipcRenderer } from 'electron'
+import { GoogleGenerativeAI } from '@google/generative-ai'
+import { GoogleAIFileManager } from '@google/generative-ai/server'
 
 // Custom APIs for renderer
 const api = {}
@@ -66,6 +69,17 @@ api.formattedDate = (mtime) => {
   }).format(mtime)
 }
 
+api.GoogleAIFileManager = (apiKey) => {
+  return new GoogleAIFileManager(apiKey)
+}
+api.GoogleGenerativeAI = (apiKey) => {
+  return new GoogleGenerativeAI(apiKey)
+}
+
+api.mimeType = (extname) => {
+  return mime.contentType(extname)
+}
+
 api.checkFileFolder = async (resourcePath) => {
   try {
     const stats = await fsPromises.stat(resourcePath)
@@ -112,7 +126,8 @@ contextBridge.exposeInMainWorld('FileSystem', {
 contextBridge.exposeInMainWorld('path', {
   join: (dirPath, file) => path.join(dirPath, file),
   basename: (filePath) => path.basename(filePath),
-  resolve: (filePath) => path.resolve(filePath)
+  resolve: (filePath) => path.resolve(filePath),
+  extname: (filePath) => path.extname(filePath)
 })
 
 contextBridge.exposeInMainWorld('platform', {
